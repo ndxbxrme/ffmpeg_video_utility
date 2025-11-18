@@ -1,0 +1,30 @@
+# Build directories
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build artifacts
+*.dll
+*.exe
+*.pdb
+*.appx
+*.cache
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Logs
+*.log
+
+# Others
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
