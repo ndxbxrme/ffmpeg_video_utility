@@ -1,0 +1,28 @@
+<Window x:Class="FfmpegVideoUtility.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner">
+    <StackPanel Margin="16">
+        <TextBlock Text="FFmpeg Path" />
+        <DockPanel>
+            <TextBox Text="{Binding Settings.FfmpegPath}" Width="350" />
+            <Button Content="Browse" Margin="8,0,0,0" Click="BrowseFfmpeg" />
+        </DockPanel>
+        <TextBlock Text="Default Output Directory" Margin="0,8,0,0" />
+        <DockPanel>
+            <TextBox Text="{Binding Settings.DefaultOutputDirectory}" Width="350" />
+            <Button Content="Browse" Margin="8,0,0,0" Click="BrowseOutput" />
+        </DockPanel>
+        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+            <TextBlock Text="Max Concurrent Jobs" VerticalAlignment="Center" />
+            <Slider Minimum="1" Maximum="6" Value="{Binding Settings.MaxConcurrentJobs}" Width="200" Margin="12,0,0,0" />
+            <TextBlock Text="{Binding Settings.MaxConcurrentJobs}" Margin="8,0,0,0" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Cancel" IsCancel="True" Width="80" Margin="0,0,8,0" />
+            <Button Content="Save" IsDefault="True" Width="80" Click="Save" />
+        </StackPanel>
+    </StackPanel>
+</Window>
