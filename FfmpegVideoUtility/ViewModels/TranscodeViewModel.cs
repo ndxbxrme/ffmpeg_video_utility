@@ -1,7 +1,6 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using Microsoft.Win32;
 using FfmpegVideoUtility.Models;
 using FfmpegVideoUtility.Presets;
@@ -146,7 +145,6 @@ namespace FfmpegVideoUtility.ViewModels
             job.Options["resolution"] = SelectedResolution;
 
             _jobQueue.Enqueue(job);
-            MessageBox.Show("Transcode job added to queue.");
         }
     }
 }

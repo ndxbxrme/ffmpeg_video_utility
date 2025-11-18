@@ -111,8 +111,6 @@ namespace FfmpegVideoUtility.ViewModels
                 job.Options["preset"] = "faster";
                 _jobQueue.Enqueue(job);
             }
-
-            MessageBox.Show("Batch jobs queued.");
         }
     }
 }
