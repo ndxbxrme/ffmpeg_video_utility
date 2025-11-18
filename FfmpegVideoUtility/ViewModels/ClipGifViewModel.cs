@@ -1,5 +1,4 @@
 using System.IO;
-using System.Windows;
 using Microsoft.Win32;
 using FfmpegVideoUtility.Models;
 using FfmpegVideoUtility.Services;
@@ -81,7 +80,6 @@ namespace FfmpegVideoUtility.ViewModels
             job.Options["start"] = StartTimestamp;
             job.Options["end"] = EndTimestamp;
             _jobQueue.Enqueue(job);
-            MessageBox.Show("Clip job added.");
         }
 
         private void CreateGif()
@@ -98,7 +96,6 @@ namespace FfmpegVideoUtility.ViewModels
             job.Options["end"] = EndTimestamp;
             job.Options["fps"] = "12";
             _jobQueue.Enqueue(job);
-            MessageBox.Show("GIF job added.");
         }
 
         private void GenerateThumbnail()
@@ -113,7 +110,6 @@ namespace FfmpegVideoUtility.ViewModels
             };
             job.Options["timestamp"] = ThumbnailTimestamp;
             _jobQueue.Enqueue(job);
-            MessageBox.Show("Thumbnail job added.");
         }
     }
 }
