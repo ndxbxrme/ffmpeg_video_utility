@@ -31,6 +31,14 @@ A Windows desktop demo app that wraps FFmpeg workflows (transcoding, clipping, G
 - **Job queue** – tracks job progress, stores per-job logs under `%AppData%/FfmpegVideoUtility/logs`, and exposes quick access via the status bar.
 - **Presets** – JSON-based presets (`Presets/presets.json`) for common output profiles that can be extended without recompiling.
 
+## Screenshots
+
+![Transcode tab](docs/images/tab1_transcode.png)
+
+![Clip & GIF tab](docs/images/tab2_clip_and_gif.png)
+
+![Batch tab](docs/images/tab3_batch.png)
+
 ## Project Layout
 
 ```
