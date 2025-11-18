@@ -29,24 +29,24 @@ namespace FfmpegVideoUtility.Services
 
         public async Task RunThumbnailAsync(VideoJob job, CancellationToken cancellationToken = default)
         {
-            var timestamp = job.Options.GetValueOrDefault("timestamp", "00:00:01");
+            var timestamp = job.Options.TryGetValue("timestamp", out var timestampValue) ? timestampValue : "00:00:01";
             var args = $"-y -ss {timestamp} -i \"{job.InputPath}\" -vframes 1 \"{job.OutputPath}\"";
             await RunFfmpegAsync(job, args, null, cancellationToken);
         }
 
         public async Task RunClipAsync(VideoJob job, CancellationToken cancellationToken = default)
         {
-            var start = job.Options.GetValueOrDefault("start", "00:00:00");
-            var end = job.Options.GetValueOrDefault("end", "00:00:10");
+            var start = job.Options.TryGetValue("start", out var startValue) ? startValue : "00:00:00";
+            var end = job.Options.TryGetValue("end", out var endValue) ? endValue : "00:00:10";
             var args = $"-y -ss {start} -to {end} -i \"{job.InputPath}\" -c copy \"{job.OutputPath}\"";
             await RunFfmpegAsync(job, args, null, cancellationToken);
         }
 
         public async Task RunGifAsync(VideoJob job, CancellationToken cancellationToken = default)
         {
-            var start = job.Options.GetValueOrDefault("start", "00:00:00");
-            var end = job.Options.GetValueOrDefault("end", "00:00:05");
-            var fps = job.Options.GetValueOrDefault("fps", "12");
+            var start = job.Options.TryGetValue("start", out var startValue) ? startValue : "00:00:00";
+            var end = job.Options.TryGetValue("end", out var endValue) ? endValue : "00:00:05";
+            var fps = job.Options.TryGetValue("fps", out var fpsValue) ? fpsValue : "12";
             var args = $"-y -ss {start} -to {end} -i \"{job.InputPath}\" -vf fps={fps},scale=640:-1:flags=lanczos -gifflags -offsetting \"{job.OutputPath}\"";
             await RunFfmpegAsync(job, args, null, cancellationToken);
         }
