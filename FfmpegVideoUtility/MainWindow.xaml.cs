@@ -1,16 +1,17 @@
 using System.Windows;
 using FfmpegVideoUtility.ViewModels;
 
-namespace FfmpegVideoUtility;
-
-public partial class MainWindow : Window
+namespace FfmpegVideoUtility
 {
-    public MainWindow()
+    public partial class MainWindow : Window
     {
-        InitializeComponent();
-        if (DataContext is MainViewModel vm)
+        public MainWindow()
         {
-            vm.Initialize();
+            InitializeComponent();
+            if (DataContext is MainViewModel vm)
+            {
+                vm.Initialize();
+            }
         }
     }
 }

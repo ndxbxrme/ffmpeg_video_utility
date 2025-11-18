@@ -9,13 +9,13 @@ using FfmpegVideoUtility.Services;
 using FfmpegVideoUtility.Settings;
 using FfmpegVideoUtility.Utilities;
 
-namespace FfmpegVideoUtility.ViewModels;
-
-public class TranscodeViewModel : ViewModelBase
+namespace FfmpegVideoUtility.ViewModels
 {
-    private readonly JobQueue _jobQueue;
-    private readonly PresetProvider _presetProvider;
-    private readonly SettingsService _settingsService = SettingsService.Instance;
+    public class TranscodeViewModel : ViewModelBase
+    {
+        private readonly JobQueue _jobQueue;
+        private readonly PresetProvider _presetProvider;
+        private readonly SettingsService _settingsService = SettingsService.Instance;
 
     private string _inputFile = string.Empty;
     private string _outputFile = string.Empty;
@@ -132,20 +132,21 @@ public class TranscodeViewModel : ViewModelBase
 
     private bool CanStartTranscode() => !string.IsNullOrWhiteSpace(InputFile) && !string.IsNullOrWhiteSpace(OutputFile);
 
-    private void StartTranscode()
-    {
-        var job = new VideoJob
+        private void StartTranscode()
         {
-            Type = JobType.Transcode,
-            InputPath = InputFile,
-            OutputPath = OutputFile,
-            Description = $"Transcode {Path.GetFileName(InputFile)}"
-        };
-        job.Options["preset"] = SelectedSpeedPreset;
-        job.Options["crf"] = Crf.ToString();
-        job.Options["resolution"] = SelectedResolution;
+            var job = new VideoJob
+            {
+                Type = JobType.Transcode,
+                InputPath = InputFile,
+                OutputPath = OutputFile,
+                Description = $"Transcode {Path.GetFileName(InputFile)}"
+            };
+            job.Options["preset"] = SelectedSpeedPreset;
+            job.Options["crf"] = Crf.ToString();
+            job.Options["resolution"] = SelectedResolution;
 
-        _jobQueue.Enqueue(job);
-        MessageBox.Show("Transcode job added to queue.");
+            _jobQueue.Enqueue(job);
+            MessageBox.Show("Transcode job added to queue.");
+        }
     }
 }

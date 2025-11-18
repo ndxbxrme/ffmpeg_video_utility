@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using FfmpegVideoUtility.Models;
@@ -10,13 +11,13 @@ using FfmpegVideoUtility.Settings;
 using FfmpegVideoUtility.Utilities;
 using FfmpegVideoUtility.Views;
 
-namespace FfmpegVideoUtility.ViewModels;
-
-public class MainViewModel : ViewModelBase
+namespace FfmpegVideoUtility.ViewModels
 {
-    private readonly SettingsService _settingsService;
-    private readonly FfmpegService _ffmpegService;
-    private readonly JobQueue _jobQueue;
+    public class MainViewModel : ViewModelBase
+    {
+        private readonly SettingsService _settingsService;
+        private readonly FfmpegService _ffmpegService;
+        private readonly JobQueue _jobQueue;
 
     private string _queueStatus = "Ready";
 
@@ -103,5 +104,6 @@ public class MainViewModel : ViewModelBase
             }
             QueueStatus = $"{Jobs.Count(j => j.Status == JobStatus.Running)} running / {Jobs.Count} total";
         });
+    }
     }
 }
