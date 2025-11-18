@@ -21,7 +21,7 @@ namespace FfmpegVideoUtility.ViewModels
 
     private string _queueStatus = "Ready";
 
-    public ObservableCollection<VideoJob> Jobs { get; } = new();
+    public ObservableCollection<JobViewModel> Jobs { get; } = new();
 
     public TranscodeViewModel Transcode { get; }
     public ClipGifViewModel Clip { get; }
@@ -95,12 +95,12 @@ namespace FfmpegVideoUtility.ViewModels
             var existing = Jobs.FirstOrDefault(j => j.Id == job.Id);
             if (existing == null)
             {
-                Jobs.Add(job);
+                existing = new JobViewModel(job);
+                Jobs.Add(existing);
             }
             else
             {
-                existing.Status = job.Status;
-                existing.Progress = job.Progress;
+                existing.UpdateFrom(job);
             }
             QueueStatus = $"{Jobs.Count(j => j.Status == JobStatus.Running)} running / {Jobs.Count} total";
         });
