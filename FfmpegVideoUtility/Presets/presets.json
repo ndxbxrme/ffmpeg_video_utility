@@ -1,0 +1,29 @@
+[
+  {
+    "Name": "YouTube 1080p",
+    "VideoCodec": "libx264",
+    "AudioCodec": "aac",
+    "Container": "mp4",
+    "Resolution": "1920x1080",
+    "Crf": 20,
+    "SpeedPreset": "medium"
+  },
+  {
+    "Name": "YouTube 720p",
+    "VideoCodec": "libx264",
+    "AudioCodec": "aac",
+    "Container": "mp4",
+    "Resolution": "1280x720",
+    "Crf": 22,
+    "SpeedPreset": "fast"
+  },
+  {
+    "Name": "Social Media",
+    "VideoCodec": "libx264",
+    "AudioCodec": "aac",
+    "Container": "mp4",
+    "Resolution": "1080x1080",
+    "Crf": 23,
+    "SpeedPreset": "faster"
+  }
+]
