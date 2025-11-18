@@ -5,7 +5,7 @@ A Windows desktop demo app that wraps FFmpeg workflows (transcoding, clipping, G
 ## Requirements
 
 - Windows 10 or later
-- .NET SDK 8.0 with WPF workloads installed
+- .NET SDK 5.0 with WPF workloads installed
 - FFmpeg binary available locally (download from [ffmpeg.org](https://ffmpeg.org/download.html))
 
 ## Getting Started
