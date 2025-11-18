@@ -1,6 +1,6 @@
 # FFmpeg Video Utility
 
-A Windows desktop demo app that wraps FFmpeg workflows (transcoding, clipping, GIF creation, thumbnail generation, and batch normalization) behind a friendly WPF/.NET 8 user interface.
+A Windows desktop demo app that wraps FFmpeg workflows (transcoding, clipping, GIF creation, thumbnail generation, and batch normalization) behind a friendly WPF/.NET 5 user interface.
 
 ## Requirements
 
@@ -52,4 +52,3 @@ FfmpegVideoUtility/
 └── Themes/          # Shared resource dictionary
 ```
 
-This repository is meant for demo/educational purposes; tailor the commands and UI to fit your production scenario.
