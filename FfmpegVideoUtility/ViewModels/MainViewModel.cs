@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using FfmpegVideoUtility.Models;
 using FfmpegVideoUtility.Presets;
 using FfmpegVideoUtility.Services;
@@ -18,6 +19,7 @@ namespace FfmpegVideoUtility.ViewModels
         private readonly SettingsService _settingsService;
         private readonly FfmpegService _ffmpegService;
         private readonly JobQueue _jobQueue;
+        private readonly Dispatcher _dispatcher;
 
     private string _queueStatus = "Ready";
 
@@ -39,6 +41,8 @@ namespace FfmpegVideoUtility.ViewModels
 
     public MainViewModel()
     {
+        _dispatcher = Application.Current?.Dispatcher ?? Dispatcher.CurrentDispatcher;
+
         _settingsService = SettingsService.Instance;
         _ffmpegService = new FfmpegService(_settingsService);
         _jobQueue = new JobQueue(_ffmpegService, _settingsService);
@@ -90,7 +94,12 @@ namespace FfmpegVideoUtility.ViewModels
 
     private void OnJobUpdated(object? sender, VideoJob job)
     {
-        Application.Current.Dispatcher.Invoke(() =>
+        if (_dispatcher.HasShutdownStarted || _dispatcher.HasShutdownFinished)
+        {
+            return;
+        }
+
+        void UpdateJob()
         {
             var existing = Jobs.FirstOrDefault(j => j.Id == job.Id);
             if (existing == null)
@@ -102,8 +111,18 @@ namespace FfmpegVideoUtility.ViewModels
             {
                 existing.UpdateFrom(job);
             }
+
             QueueStatus = $"{Jobs.Count(j => j.Status == JobStatus.Running)} running / {Jobs.Count} total";
-        });
+        }
+
+        if (_dispatcher.CheckAccess())
+        {
+            UpdateJob();
+        }
+        else
+        {
+            _dispatcher.BeginInvoke((Action)UpdateJob);
+        }
     }
     }
 }
