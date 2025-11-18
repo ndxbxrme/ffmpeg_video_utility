@@ -1,8 +1,11 @@
-namespace FfmpegVideoUtility.Settings;
+using System;
 
-public class AppSettings
+namespace FfmpegVideoUtility.Settings
 {
-    public string FfmpegPath { get; set; } = string.Empty;
-    public string DefaultOutputDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-    public int MaxConcurrentJobs { get; set; } = 2;
+    public class AppSettings
+    {
+        public string FfmpegPath { get; set; } = string.Empty;
+        public string DefaultOutputDirectory { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+        public int MaxConcurrentJobs { get; set; } = 2;
+    }
 }

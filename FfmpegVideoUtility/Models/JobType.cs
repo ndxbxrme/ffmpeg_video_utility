@@ -1,10 +1,11 @@
-namespace FfmpegVideoUtility.Models;
-
-public enum JobType
+namespace FfmpegVideoUtility.Models
 {
-    Transcode,
-    Thumbnail,
-    Clip,
-    Gif,
-    BatchTranscode
+    public enum JobType
+    {
+        Transcode,
+        Thumbnail,
+        Clip,
+        Gif,
+        BatchTranscode
+    }
 }

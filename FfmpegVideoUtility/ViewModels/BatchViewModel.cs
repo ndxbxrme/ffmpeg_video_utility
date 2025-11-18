@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -6,11 +7,11 @@ using FfmpegVideoUtility.Models;
 using FfmpegVideoUtility.Services;
 using FfmpegVideoUtility.Utilities;
 
-namespace FfmpegVideoUtility.ViewModels;
-
-public class BatchViewModel : ViewModelBase
+namespace FfmpegVideoUtility.ViewModels
 {
-    private readonly JobQueue _jobQueue;
+    public class BatchViewModel : ViewModelBase
+    {
+        private readonly JobQueue _jobQueue;
 
     private string _inputFolder = string.Empty;
     private string _outputFolder = string.Empty;
@@ -87,30 +88,31 @@ public class BatchViewModel : ViewModelBase
         MessageBox.Show($"Discovered {PendingFiles.Count} files.");
     }
 
-    private void StartBatch()
-    {
-        if (string.IsNullOrWhiteSpace(OutputFolder))
+        private void StartBatch()
         {
-            MessageBox.Show("Please choose an output folder.");
-            return;
-        }
-
-        foreach (var file in PendingFiles)
-        {
-            var output = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(file) + "_normalized.mp4");
-            var job = new VideoJob
+            if (string.IsNullOrWhiteSpace(OutputFolder))
             {
-                Type = JobType.BatchTranscode,
-                InputPath = file,
-                OutputPath = output,
-                Description = $"Batch {Path.GetFileName(file)}"
-            };
-            job.Options["resolution"] = SelectedResolution;
-            job.Options["crf"] = "22";
-            job.Options["preset"] = "faster";
-            _jobQueue.Enqueue(job);
-        }
+                MessageBox.Show("Please choose an output folder.");
+                return;
+            }
 
-        MessageBox.Show("Batch jobs queued.");
+            foreach (var file in PendingFiles)
+            {
+                var output = Path.Combine(OutputFolder, Path.GetFileNameWithoutExtension(file) + "_normalized.mp4");
+                var job = new VideoJob
+                {
+                    Type = JobType.BatchTranscode,
+                    InputPath = file,
+                    OutputPath = output,
+                    Description = $"Batch {Path.GetFileName(file)}"
+                };
+                job.Options["resolution"] = SelectedResolution;
+                job.Options["crf"] = "22";
+                job.Options["preset"] = "faster";
+                _jobQueue.Enqueue(job);
+            }
+
+            MessageBox.Show("Batch jobs queued.");
+        }
     }
 }

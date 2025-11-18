@@ -1,10 +1,11 @@
-namespace FfmpegVideoUtility.Models;
-
-public enum JobStatus
+namespace FfmpegVideoUtility.Models
 {
-    Pending,
-    Running,
-    Completed,
-    Failed,
-    Cancelled
+    public enum JobStatus
+    {
+        Pending,
+        Running,
+        Completed,
+        Failed,
+        Cancelled
+    }
 }
